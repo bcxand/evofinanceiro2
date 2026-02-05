@@ -21,10 +21,10 @@ const Button = ({
   type = "button",
   ...props 
 }: ButtonProps) => {
-  const baseStyles = "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
+  const baseStyles = "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
   
   const variantStyles = {
-    default: "bg-primary bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700",
+    default: "bg-primary bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-700 hover:to-teal-700",
     outline: "border border-input bg-background hover:bg-slate-100 hover:text-accent-foreground"
   };
   
@@ -50,7 +50,7 @@ const Input = ({ className = "", id, ...props }: InputProps) => {
     <input
       id={id}
       className={cn(
-        "flex h-10 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        "flex h-10 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
       {...props}
@@ -85,7 +85,6 @@ export const AuthPage = () => {
         if (data.session) {
             navigate('/dashboard');
         } else {
-            // Fallback for immediate login if session wasn't returned
             const { error: signInError } = await supabase.auth.signInWithPassword({
                 email,
                 password,
@@ -119,7 +118,7 @@ export const AuthPage = () => {
       {/* Background Pattern */}
       <div className="absolute inset-0 z-0">
          <AnimatedGridPattern 
-            className="text-slate-200/50 [mask-image:radial-gradient(800px_circle_at_center,white,transparent)]" 
+            className="text-emerald-100/50 [mask-image:radial-gradient(800px_circle_at_center,white,transparent)]" 
             width={40} 
             height={40} 
             numSquares={30}
@@ -129,7 +128,7 @@ export const AuthPage = () => {
       {/* Back Button */}
       <button 
         onClick={() => navigate('/')} 
-        className="absolute top-6 left-6 flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors z-20 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full border border-slate-200"
+        className="absolute top-6 left-6 flex items-center gap-2 text-slate-500 hover:text-emerald-600 transition-colors z-20 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full border border-slate-200"
       >
         <ArrowLeft size={18} />
         <span className="font-medium text-sm">Voltar</span>
@@ -144,16 +143,16 @@ export const AuthPage = () => {
         {/* Left side - Visuals */}
         <div className="hidden md:flex w-1/2 h-full relative overflow-hidden bg-slate-900 flex-col items-center justify-center text-white p-12">
            {/* Abstract Background */}
-           <div className="absolute inset-0 bg-gradient-to-br from-blue-900 to-slate-900 z-0" />
-           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-emerald-500/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
+           <div className="absolute inset-0 bg-gradient-to-br from-emerald-950 to-slate-950 z-0" />
+           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald-500/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-teal-500/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
 
            <div className="relative z-10 text-center">
               <motion.div 
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-lg shadow-blue-500/30"
+                className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-lg shadow-emerald-500/30"
               >
                  <span className="text-4xl font-bold text-white">F</span>
               </motion.div>
@@ -242,7 +241,7 @@ export const AuthPage = () => {
                   />
                   <button
                     type="button"
-                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600 transition-colors"
+                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-emerald-600 transition-colors"
                     onClick={() => setIsPasswordVisible(!isPasswordVisible)}
                   >
                     {isPasswordVisible ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -272,8 +271,8 @@ export const AuthPage = () => {
                   type="submit"
                   disabled={loading}
                   className={cn(
-                    "w-full bg-slate-900 hover:bg-slate-800 text-white py-3 rounded-lg transition-all duration-300 shadow-lg shadow-slate-900/20",
-                    isHovered ? "shadow-xl shadow-slate-900/30" : ""
+                    "w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-lg transition-all duration-300 shadow-lg shadow-emerald-600/20",
+                    isHovered ? "shadow-xl shadow-emerald-600/30" : ""
                   )}
                 >
                   <span className="flex items-center justify-center font-bold">
@@ -296,7 +295,7 @@ export const AuthPage = () => {
                             setMode(mode === 'LOGIN' ? 'SIGNUP' : 'LOGIN');
                             setError(null);
                         }} 
-                        className="ml-2 text-blue-600 hover:text-blue-700 font-bold hover:underline transition-all"
+                        className="ml-2 text-emerald-600 hover:text-emerald-700 font-bold hover:underline transition-all"
                     >
                         {mode === 'LOGIN' ? 'Começar agora' : 'Fazer Login'}
                     </button>
